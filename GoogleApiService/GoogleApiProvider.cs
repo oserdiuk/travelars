@@ -1,66 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Travelars.DTO;
+﻿using System.Linq;
+using GoogleApiService.Entities.Common;
+using GoogleApiService.Entities.Maps.Geocode.Request;
+using GoogleApiService.Entities.Places.Details.Request;
+using GoogleApiService.Entities.Places.Search.Radar.Request;
+using Travelars.DTO.GoogleModels;
+using IApplicationSettingsProvider = Travelars.Infrastructure.Interfaces.IApplicationSettingsProvider;
 
 namespace GoogleApiService
 {
     public class GoogleApiProvider
     {
-        private const string SearchPlaceUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-        private const string GooglePlacesKeySettings = "GooglePlacesApiKey";
-        private readonly string _apiKeyPlaces;
         private readonly IHttpRequestService _httpRequestService;
+        private readonly IApplicationSettingsProvider _appSettingsProvider;
 
-        public GoogleApiProvider(IHttpRequestService httpRequestService)
+        public GoogleApiProvider(
+            IHttpRequestService httpRequestService,
+            IApplicationSettingsProvider appSettingsProvider)
         {
-            _httpRequestService = httpRequestService;
-            _apiKeyPlaces = ConfigurationManager.AppSettings.Get(GooglePlacesKeySettings);
+            _appSettingsProvider = appSettingsProvider;
+            _httpRequestService = new HttpRequestService();
         }
 
-        public void SearchPlace(SearchPlaceDTO model)
+        public void SearchPlace(SearchPlaceRequest model)
         {
-            string query = string.Empty;
-            using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-    new KeyValuePair<string, string>("key", _apiKeyPlaces),
-    new KeyValuePair<string, string>("location", GetLocation(model.Address)),
-    new KeyValuePair<string, string>("types", model.Radius),
-    new KeyValuePair<string, string>("keyword", model.Radius),
-    new KeyValuePair<string, string>("language", model.Radius),
-    new KeyValuePair<string, string>("minprice", model.Radius),
-    new KeyValuePair<string, string>("maxprice", model.Radius),
-    new KeyValuePair<string, string>("name", model.Radius),
-    new KeyValuePair<string, string>("rankby", model.RankBy),
-    new KeyValuePair<string, string>("types", model.Radius),
-    new KeyValuePair<string, string>("opennow", model.Radius),
-    new KeyValuePair<string, string>("opennow", model.Radius),
-    new KeyValuePair<string, string>("opennow", model.Radius),
-    new KeyValuePair<string, string>("opennow", model.Radius),
-    new KeyValuePair<string, string>("opennow", model.Radius),
-}))
+            var key = "AIzaSyALEYF3F-GGdvXIUqdIMk8BiLm1KqidD1s";
+            var d = GooglePlaces.RadarSearch.Query(new PlacesRadarSearchRequest
             {
-                query = content.ReadAsStringAsync().Result;
-            }
-            string url = builder.ToString();
-            var requestParams =
-            var response = _httpRequestService.MakeRequest(SearchPlaceUrl, query);
-            // Parse the response body. Blocking!
-            var dataObjects = response.Content.ReadAsAsync<IEnumerable<DataObject>>().Result;
-            foreach (var d in dataObjects)
+                Key = key,
+                Location = GetLocation(model.Address),
+                Radius = 1000, 
+                Keyword = model.Keyword
+            });
+            var place = GooglePlaces.Details.Query(new PlacesDetailsRequest
             {
-                Console.WriteLine("{0}", d.Name);
-            }
+                Key = key,
+                PlaceId = d.Results.FirstOrDefault().PlaceId
+            });
         }
 
-        public string GetLocation(string address)
+        //public string GetLocation(string address)
+        //{
+        //    var coder = new GoogleMapsGeocoding.Geocoder("AIzaSyALEYF3F-GGdvXIUqdIMk8BiLm1KqidD1s");//_appSettingsProvider.GooglePlacesApiKey);
+        //    var geocode = coder.Geocode(address);
+        //    var location = geocode.Results[0].Geometry.Location;
+        //    return $"{location.Lat},{location.Lng}";
+        //}
+
+        public Location GetLocation(string address)
         {
-            GoogleMapsGeocoding.Geocoder coder = new GoogleMapsGeocoding.Geocoder(_apiKeyPlaces);
-            var geocode = coder.Geocode(address);
-            return geocode.Results.ToString();
+
+            var coder = GoogleMaps.Geocode.Query(new GeocodingRequest()
+            {
+                Key = "AIzaSyALEYF3F-GGdvXIUqdIMk8BiLm1KqidD1s",
+                Address = address
+            });//_appSettingsProvider.GooglePlacesApiKey);
+            return coder.Results.FirstOrDefault().Geometry.Location;
+        }
+
+        private string AddParameter(string key, string value)
+        {
+            return !string.IsNullOrEmpty(value) ? $"&{key}={value}" : string.Empty;
         }
     }
 }

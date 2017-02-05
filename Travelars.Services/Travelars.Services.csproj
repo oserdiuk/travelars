@@ -64,12 +64,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Abstract\AccountServices\IAccountService.cs" />
+    <Compile Include="AccountServices\AccountService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Travelars.DTO\Travelars.DTO.csproj">
+      <Project>{ECE997E5-4767-474B-9069-F3092AD1F603}</Project>
+      <Name>Travelars.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Travelars.Infrastructure\Travelars.Infrastructure.csproj">
+      <Project>{f8210a7a-3022-46be-add1-8b5de182ba71}</Project>
+      <Name>Travelars.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
