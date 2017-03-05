@@ -1,65 +1,40 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 using AutoMapper;
-using Travelars.DTO.Account;
+using Swashbuckle.Swagger.Annotations;
+using Travelars.DTO;
 using Travelars.Models;
-using Travelars.Services.Abstract.AccountServices;
+using Travelars.Services.Abstract;
 
 namespace Travelars.ApiControllers
 {
-    [RoutePrefix("api/")]
+    [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
-        private readonly IAccountService _accountService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
         public AccountController(
-            IAccountService accountService,
+            IUserService userService,
             IMapper mapper)
         {
-            _accountService = accountService;
+            _userService = userService;
             _mapper = mapper;
         }
 
-        [Route("register")]
-        [HttpPost]
-        public HttpResponseMessage Register([FromBody] RegisterViewModel model)
+        // POST api/Account/Register
+        [AllowAnonymous]
+        [Route("Register")]
+        [SwaggerOperation]
+        public IHttpActionResult Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var registrationModel = _mapper.Map<RegistrationModel>(model);
-                _accountService.Register(registrationModel);
-                return Request.CreateResponse(HttpStatusCode.Created);
+                return BadRequest(ModelState);
             }
 
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
-        }
-
-        [Route("login")]
-        [HttpPost]
-        public HttpResponseMessage Login([FromBody] LoginViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var token = _accountService.Login(model.Email, model.Password);
-                return Request.CreateResponse(HttpStatusCode.OK, token);
-            }
-
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
-        }
-
-        [Route("logout")]
-        [HttpPost]
-        public HttpResponseMessage Logout([FromBody] string userToken)
-        {
-            if (ModelState.IsValid)
-            {
-                _accountService.Logout(userToken);
-                return Request.CreateResponse(HttpStatusCode.OK);
-            }
-
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            var userModel = _mapper.Map<UserModel>(model);
+            var id = _userService.CreateUser(userModel);
+            return Ok(id);
         }
     }
 }

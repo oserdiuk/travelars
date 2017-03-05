@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Travelars.DAL.Abstract;
 using Travelars.DAL.Repositories;
-using Travelars.Domain.Models;
+using Travelars.Domain.Entities;
 
 namespace Travelars.DAL
 {
     public interface IUnitOfWork
     {
-        IRepository<User> UserRepository { get; }
+        IUserRepository UserRepository { get; }
+
+        IRepository<UserDetails> UserDetailsRepository { get; }
 
         void SaveChanges();
     }

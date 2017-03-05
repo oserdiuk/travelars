@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApiService.Entities.Common;
