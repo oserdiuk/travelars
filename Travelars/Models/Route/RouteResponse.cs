@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using GoogleApiService.Entities.Places.Search.Common.Enums;
 using Travelars.DTO.Route;
 
 namespace Travelars.Models.Route
 {
-    public class RouteRequest
+    public class RouteResponse
     {
+        public IEnumerable<IEnumerable<PlaceVisit>> SchedulePerDay { get; set; }
+
         public int NumberOfTravelers { get; set; }
 
         public string City { get; set; }
@@ -20,7 +21,5 @@ namespace Travelars.Models.Route
         public DateTime EndDate { get; set; }
 
         public IEnumerable<RouteOrientation> RouteOrientation { get; set; }
-
-        public IEnumerable<SearchPlaceType> PlaceTypes { get; set; }
     }
 }

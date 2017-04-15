@@ -207,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\AccountController.cs" />
+    <Compile Include="ApiControllers\RouteController.cs" />
     <Compile Include="App_Start\AutoMapperConfiguration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -227,7 +228,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\Route\PlaceVisit.cs" />
     <Compile Include="Models\Route\RouteRequest.cs" />
+    <Compile Include="Models\Route\RouteResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -302,6 +305,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GoogleApiService\GoogleApiService.csproj">
+      <Project>{1DEF063B-CDE6-4F72-AAAF-DE11735D7F73}</Project>
+      <Name>GoogleApiService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Travelars.DAL\Travelars.DAL.csproj">
       <Project>{AE9946D1-A9C6-494A-9BCF-35E98800D4A9}</Project>
       <Name>Travelars.DAL</Name>

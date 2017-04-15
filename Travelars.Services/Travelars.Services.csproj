@@ -85,6 +85,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IRouteService.cs" />
     <Compile Include="Abstract\IUserService.cs" />
     <Compile Include="AccountServices\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
