@@ -10,17 +10,15 @@ namespace Travelars.DTO.Route
     {
         public Guid Id { get; set; }
 
-        public IEnumerable<DayActivity> SchedulePerDay { get; set; }
+        public IList<DayActivity> SchedulePerDay { get; set; } = new List<DayActivity>();
 
         public int NumberOfTravelers { get; set; }
 
-        public string City { get; set; }
+        public IList<string> Cities { get; set; } = new List<string>();
 
-        public int Distance { get; set; }
+        public DateTimeOffset StartDate { get; set; }
 
-        public DateTime StartDate { get; set; }
-
-        public DateTime EndDate { get; set; }
+        public DateTimeOffset EndDate { get; set; }
 
         public IEnumerable<RouteOrientation> RouteOrientation { get; set; }
     }

@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
+using Travelars.DTO.Route;
 using Travelars.Models.Route;
 using Travelars.Services.Abstract;
 
@@ -22,9 +23,10 @@ namespace Travelars.ApiControllers
         [HttpPost]
         public HttpResponseMessage Post([FromBody] RouteRequest requestModel)
         {
-            var routes = _routeService.GenerateRoutes(requestModel);
-            var model = _mapper.Map<IEnumerable<RouteResponse>>(routes);
-            return Request.CreateResponse(HttpStatusCode.OK, routes);
+            var request = _mapper.Map<RouteFilter>(requestModel);
+            var route = _routeService.GenerateRoute(request);
+            var model = _mapper.Map<RouteResponse>(route);
+            return Request.CreateResponse(HttpStatusCode.OK, route);
         }
     }
 }

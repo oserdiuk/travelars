@@ -7,6 +7,8 @@ namespace Travelars.DTO.Route
     {
         public Guid Id { get; set; }
 
-        public IEnumerable<PlaceVisit> Type { get; set; }
+        public DateTimeOffset Date { get; set; }
+
+        public IList<PlaceVisit> Places { get; set; } = new List<PlaceVisit>();
     }
 }
