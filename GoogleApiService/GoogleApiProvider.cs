@@ -13,6 +13,10 @@ namespace GoogleApiService
         private readonly IHttpRequestService _httpRequestService;
         private readonly IApplicationSettingsProvider _appSettingsProvider;
 
+        public GoogleApiProvider()
+        {
+            
+        }
         public GoogleApiProvider(
             IHttpRequestService httpRequestService,
             IApplicationSettingsProvider appSettingsProvider)
@@ -23,13 +27,14 @@ namespace GoogleApiService
 
         public void SearchPlace(SearchPlaceRequest model)
         {
-            var key = "AIzaSyALEYF3F-GGdvXIUqdIMk8BiLm1KqidD1s";
+            var key = "AIzaSyAIkjsduy789XIff0vKo0kuKySULgllZYY";
             var d = GooglePlaces.RadarSearch.Query(new PlacesRadarSearchRequest
             {
                 Key = key,
                 Location = GetLocation(model.Address),
                 Radius = 1000, 
-                Keyword = model.Keyword
+                Keyword = model.Keyword,
+                Language = "ru"
             });
             var place = GooglePlaces.Details.Query(new PlacesDetailsRequest
             {
@@ -40,7 +45,7 @@ namespace GoogleApiService
 
         //public string GetLocation(string address)
         //{
-        //    var coder = new GoogleMapsGeocoding.Geocoder("AIzaSyALEYF3F-GGdvXIUqdIMk8BiLm1KqidD1s");//_appSettingsProvider.GooglePlacesApiKey);
+        //    var coder = new GoogleMapsGeocoding.Geocoder("AIzaSyAIkjsduy789XIff0vKo0kuKySULgllZYY");//_appSettingsProvider.GooglePlacesApiKey);
         //    var geocode = coder.Geocode(address);
         //    var location = geocode.Results[0].Geometry.Location;
         //    return $"{location.Lat},{location.Lng}";
@@ -51,7 +56,7 @@ namespace GoogleApiService
 
             var coder = GoogleMaps.Geocode.Query(new GeocodingRequest()
             {
-                Key = "AIzaSyALEYF3F-GGdvXIUqdIMk8BiLm1KqidD1s",
+                Key = "AIzaSyAIkjsduy789XIff0vKo0kuKySULgllZYY",
                 Address = address
             });//_appSettingsProvider.GooglePlacesApiKey);
             return coder.Results.FirstOrDefault().Geometry.Location;

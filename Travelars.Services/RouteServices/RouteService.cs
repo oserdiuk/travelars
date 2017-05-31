@@ -35,14 +35,14 @@ namespace Travelars.Services.RouteServices
                 };
                 var hoursLeft = AvailableHoursPerDay;
                 var place = GetRandomPlace(requestModel.City);
-                var recommendedTime = place.PlaceType.GetRecommendedHours();
-                while (recommendedTime <= hoursLeft)
-                {
-                    place = GetRandomPlace(requestModel.City);
-                    recommendedTime = place.PlaceType.GetRecommendedHours();
-                }
+                //var recommendedTime = place.PlaceType.GetRecommendedHours();
+                //while (recommendedTime <= hoursLeft)
+                //{
+                //    place = GetRandomPlace(requestModel.City);
+                //    recommendedTime = place.PlaceType.GetRecommendedHours();
+                //}
 
-                hoursLeft -= recommendedTime;
+                //hoursLeft -= recommendedTime;
                 dayActivity.Places.Add(place);
                 if (hoursLeft <= hoursLimit)
                 {

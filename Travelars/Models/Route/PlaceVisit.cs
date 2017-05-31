@@ -1,20 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using GoogleApiService.Entities.Places.Search.Common.Enums;
+using Travelars.DTO.GoogleModels;
+using Travelars.DTO.Route;
 
 namespace Travelars.Models.Route
 {
     public class PlaceVisit
     {
-        public DateTime VisitStartTime { get; set; }
+        public List<string> PlaceType { get; set; }
 
-        public DateTime VisitEndTime { get; set; }
+        public string PlaceId { get; set; }
+
+        public string Address { get; set; }
+
+        public List<string> Phones { get; set; }
 
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public bool IsOpenNow { get; set; }
 
-        public SearchPlaceType SearchPlaceType { get; set; }
+        public List<string> OpeningHours { get; set; }
 
-        public string ImageUrl { get; set; }
+        public List<string> ImageUrls { get; set; }
+
+        public PriceLevel PriceLevel { get; set; }
+
+        public double Rating { get; set; }
+
     }
 }

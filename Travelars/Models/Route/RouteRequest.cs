@@ -13,7 +13,7 @@ namespace Travelars.Models.Route
 
         public string City { get; set; }
 
-        public int Distance { get; set; }
+        public int MaxNumberOfPlacesPerDate { get; set; }
 
         public DateTime StartDate { get; set; }
 

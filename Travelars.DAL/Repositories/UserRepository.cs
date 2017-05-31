@@ -12,7 +12,7 @@ namespace Travelars.DAL.Repositories
     { 
         private readonly UserManager<IdentityUser> _userManager;
 
-        public UserRepository(DbContext dbContext)
+        public UserRepository(TravelarsDbContext dbContext)
         {
             _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(dbContext));
         }
