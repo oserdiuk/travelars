@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -8,7 +7,7 @@ using Travelars.DTO.GoogleModels;
 using Travelars.DTO.Route;
 using Travelars.Models.Route;
 using Travelars.Services.Abstract;
-using PlaceVisit = Travelars.DTO.Route.PlaceVisit;
+using PlaceVisit = Travelars.Models.Route.PlaceVisit;
 
 namespace Travelars.ApiControllers
 {
@@ -28,26 +27,27 @@ namespace Travelars.ApiControllers
 
         }
 
-  //      {
-  //"numberOfTravelers": 2,
-  //"city": "Khariv",
-  //"maxNumberOfPlacesPerDate": 4,
-  //"startDate": "2017-08-31",
-  //"endDate": "2017-09-2",
-  //"routeOrientation": [ "Couple" ],
-  //"placeTypes": [ "Park", "Cafe" ]
-  //  }
-    [Route(Name = "api/route")]
+        //      {
+        //"numberOfTravelers": 2,
+        //"city": "Kharkiv",
+        //"priceLevel": "Inexpensive",
+        //"maxNumberOfPlacesPerDate": 4,
+        //"startDate": "2017-08-31",
+        //"endDate": "2017-09-2",
+        //"routeOrientation": [ "Couple" ],
+        //"placeTypes": [ "Park", "Cafe" ]
+        //  }
+        [Route(Name = "api/route")]
         [HttpPost]
         public HttpResponseMessage Post([FromBody] RouteRequest requestModel)
         {
             //var request = _mapper.Map<RouteFilter>(requestModel);
             //var route = _routeService.GenerateRoute(request);
             //var model = _mapper.Map<RouteResponse>(route);
-            List<IEnumerable<Models.Route.PlaceVisit>> routeSchedule = new List<IEnumerable<Travelars.Models.Route.PlaceVisit>>();
+            List<IEnumerable<PlaceVisit>> routeSchedule = new List<IEnumerable<PlaceVisit>>();
             var days = requestModel.StartDate.Date.Subtract(requestModel.EndDate.Date).Days;
-            var firstDay = new List<Travelars.Models.Route.PlaceVisit>();
-            firstDay.Add(new Travelars.Models.Route.PlaceVisit
+            var firstDay = new List<PlaceVisit>();
+            firstDay.Add(new PlaceVisit
             {
                 PlaceType = new List<string> { PlaceType.Cafe.ToString(), PlaceType.Establishment.ToString(), PlaceType.Food.ToString() },
                 PlaceId = "86ab955c6a2d528237bc28933bea3d8d4895c472",
@@ -69,7 +69,7 @@ namespace Travelars.ApiControllers
                 PriceLevel = PriceLevel.Free,
                 ImageUrls = new List<string> { "https://lh5.ggpht.com/-SJMZxfmezRQ/WQg1sv1ABqI/AAAAAAAA7i4/UnpHqHXf_hcNofufkFNhQnkQ6C01htvKwCLIB/s240/photo"}
             });
-            firstDay.Add(new Travelars.Models.Route.PlaceVisit
+            firstDay.Add(new PlaceVisit
             {
                 PlaceType = new List<string> { PlaceType.Park.ToString(), PlaceType.Establishment.ToString() },
                 PlaceId = "566722132a9c5db7d22337517dc619dc5989fb89",

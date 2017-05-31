@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using GoogleApiService.Entities.Places.Search.Common.Enums;
+using Travelars.DTO.GoogleModels;
 using Travelars.DTO.Route;
 
 namespace Travelars.Models.Route
@@ -12,6 +13,8 @@ namespace Travelars.Models.Route
         public int NumberOfTravelers { get; set; }
 
         public string City { get; set; }
+
+        public PriceLevel PriceLevel { get; set; }
 
         public int MaxNumberOfPlacesPerDate { get; set; }
 

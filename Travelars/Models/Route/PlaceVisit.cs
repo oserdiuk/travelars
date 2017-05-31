@@ -18,6 +18,10 @@ namespace Travelars.Models.Route
 
         public string Name { get; set; }
 
+        public string Longtitude { get; set; }
+
+        public string Latitude { get; set; }
+
         public bool IsOpenNow { get; set; }
 
         public List<string> OpeningHours { get; set; }

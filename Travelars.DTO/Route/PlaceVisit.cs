@@ -21,7 +21,7 @@ namespace Travelars.DTO.Route
 
         public List<string> ImageUrls { get; set; }
 
-        public PriceLevel PriceLevel { get; set; }
+        public string PriceLevel { get; set; }
 
         public double Rating { get; set; }
 
