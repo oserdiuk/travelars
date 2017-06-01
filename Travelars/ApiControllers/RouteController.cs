@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -11,6 +12,7 @@ using PlaceVisit = Travelars.Models.Route.PlaceVisit;
 
 namespace Travelars.ApiControllers
 {
+    [Route("api/route")]
     public class RouteController : ApiController
     {
         private readonly IRouteService _routeService;
@@ -27,6 +29,13 @@ namespace Travelars.ApiControllers
 
         }
 
+        [HttpGet]
+        [Route("")]
+        public HttpResponseMessage GetRoute([FromUri] Guid routeId)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
         //      {
         //"numberOfTravelers": 2,
         //"city": "Kharkiv",
@@ -37,7 +46,7 @@ namespace Travelars.ApiControllers
         //"routeOrientation": [ "Couple" ],
         //"placeTypes": [ "Park", "Cafe" ]
         //  }
-        [Route(Name = "api/route")]
+        [Route("")]
         [HttpPost]
         public HttpResponseMessage Post([FromBody] RouteRequest requestModel)
         {
@@ -89,6 +98,20 @@ namespace Travelars.ApiControllers
                 requestModel.RouteOrientation,
                 routeSchedule);
             return Request.CreateResponse(HttpStatusCode.OK, route);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public HttpResponseMessage EditRoute([FromBody] RouteResponse route)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpDelete]
+        [Route("")]
+        public HttpResponseMessage DeleteRoute([FromUri] Guid routeId)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

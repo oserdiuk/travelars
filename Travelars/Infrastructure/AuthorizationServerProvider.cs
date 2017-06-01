@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin.Security.OAuth;
+﻿using System.IO;
+using Microsoft.Owin.Security.OAuth;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -22,7 +23,6 @@ namespace Travelars.Infrastructure
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
             var user = await _userService.FindUserAsync(context.UserName, context.Password);
             if (user == null)
             {

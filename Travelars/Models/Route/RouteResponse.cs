@@ -15,8 +15,9 @@ namespace Travelars.Models.Route
             DateTime startDate, 
             DateTime endDate, 
             IEnumerable<RouteOrientation> routeOrientation,
-            IEnumerable<IEnumerable<Travelars.Models.Route.PlaceVisit>> schedulePerDay)
+            IEnumerable<IEnumerable<Route.PlaceVisit>> schedulePerDay)
         {
+            Id = Guid.NewGuid();
             NumberOfTravelers = numberOfTravelers;
             MaxNumberOfPlacesPerDate = maxNumberOfPlacesPerDate;
             StartDate = startDate;
@@ -24,6 +25,8 @@ namespace Travelars.Models.Route
             RouteOrientation = routeOrientation;
             SchedulePerDay = schedulePerDay;
         }
+
+        public Guid Id { get; set; }
 
         public IEnumerable<IEnumerable<Travelars.Models.Route.PlaceVisit>> SchedulePerDay { get; set; }
 

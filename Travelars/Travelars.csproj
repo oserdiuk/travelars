@@ -216,6 +216,7 @@
   <ItemGroup>
     <Compile Include="ApiControllers\AccountController.cs" />
     <Compile Include="ApiControllers\RouteController.cs" />
+    <Compile Include="ApiControllers\TicketsController.cs" />
     <Compile Include="App_Start\AutoMapperConfiguration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -239,6 +240,15 @@
     <Compile Include="Models\Route\PlaceVisit.cs" />
     <Compile Include="Models\Route\RouteRequest.cs" />
     <Compile Include="Models\Route\RouteResponse.cs" />
+    <Compile Include="Models\Ticket\Car.cs" />
+    <Compile Include="Models\Ticket\CarType.cs" />
+    <Compile Include="Models\Ticket\Seat.cs" />
+    <Compile Include="Models\Ticket\SeatsType.cs" />
+    <Compile Include="Models\Ticket\Station.cs" />
+    <Compile Include="Models\Ticket\TicketsRequest.cs" />
+    <Compile Include="Models\Ticket\TicketsResponse.cs" />
+    <Compile Include="Models\Ticket\TicketsVariant.cs" />
+    <Compile Include="Models\Ticket\Trip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
