@@ -10,6 +10,8 @@ namespace Travelars.DAL
 
         IRepository<UserDetails> UserDetailsRepository { get; }
 
+        IRepository<Place> PlaceRepository { get; }
+
         void SaveChanges();
     }
 }

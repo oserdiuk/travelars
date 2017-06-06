@@ -216,7 +216,9 @@
   <ItemGroup>
     <Compile Include="ApiControllers\AccountController.cs" />
     <Compile Include="ApiControllers\RouteController.cs" />
+    <Compile Include="ApiControllers\HotelController.cs" />
     <Compile Include="ApiControllers\TicketsController.cs" />
+    <Compile Include="ApiControllers\VoteController.cs" />
     <Compile Include="App_Start\AutoMapperConfiguration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -237,6 +239,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\Review\ReviewRequest.cs" />
     <Compile Include="Models\Route\PlaceVisit.cs" />
     <Compile Include="Models\Route\RouteRequest.cs" />
     <Compile Include="Models\Route\RouteResponse.cs" />

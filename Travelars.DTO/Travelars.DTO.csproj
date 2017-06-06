@@ -54,11 +54,13 @@
     <Compile Include="GoogleModels\SearchPlaceRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Route\DayActivity.cs" />
+    <Compile Include="Route\PartOfADay.cs" />
     <Compile Include="Route\PlaceVisit.cs" />
     <Compile Include="Route\RouteFilter.cs" />
     <Compile Include="Route\RouteOrientation.cs" />
     <Compile Include="Route\RoutePlan.cs" />
     <Compile Include="Route\PlaceType.cs" />
+    <Compile Include="Route\Season.cs" />
     <Compile Include="User\UserModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

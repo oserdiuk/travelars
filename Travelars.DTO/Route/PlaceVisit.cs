@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Travelars.DTO.GoogleModels;
 
 namespace Travelars.DTO.Route
 {
@@ -9,7 +8,9 @@ namespace Travelars.DTO.Route
 
         public string PlaceId { get; set; }
 
-        public string  Address { get; set; }
+        public string Address { get; set; }
+
+        public string Description { get; set; }
 
         public List<string> Phones { get; set; }
 
@@ -24,6 +25,5 @@ namespace Travelars.DTO.Route
         public string PriceLevel { get; set; }
 
         public double Rating { get; set; }
-
     }
 }

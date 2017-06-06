@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Travelars.DTO.GoogleModels;
 
 namespace Travelars.DTO.Route
 {
@@ -12,12 +10,16 @@ namespace Travelars.DTO.Route
 
         public string City { get; set; }
 
-        public DateTimeOffset StartTime { get; set; }
+        public PriceLevel PriceLevel { get; set; }
 
-        public DateTimeOffset EndTime { get; set; }
+        public int MaxNumberOfPlacesPerDate { get; set; }
 
-        public RouteOrientation RouteOrientation { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public IList<PlaceType> PlaceTypes { get; set; }
+        public DateTime EndDate { get; set; }
+
+        public IEnumerable<RouteOrientation> RouteOrientation { get; set; }
+
+        public IEnumerable<PlaceType> PlaceTypes { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace Travelars.ApiControllers
 
         [Route("")]
         [HttpGet]
-        public HttpResponseMessage Get([FromBody] TicketsRequest model)
+        public HttpResponseMessage Get([FromUri] TicketsRequest model)
         {
             return Request.CreateResponse(HttpStatusCode.OK, new TicketsResponse
             {
@@ -80,6 +80,13 @@ namespace Travelars.ApiControllers
                     }
                 }
             });
+        }
+
+        [Route("")]
+        [HttpPost]
+        public HttpResponseMessage BuyTicket([FromBody] TicketsRequest model)
+        {
+            return Request.CreateResponse(HttpStatusCode.NotFound);
         }
     }
 }
