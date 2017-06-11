@@ -21,6 +21,8 @@ namespace Travelars.ApiControllers
             _mapper = mapper;
         }
 
+        
+
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("")]

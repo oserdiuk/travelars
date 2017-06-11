@@ -7,7 +7,8 @@ using System.Web.Http;
 
 namespace Travelars.ApiControllers
 {
-    public class TicketController : ApiController
+    [RoutePrefix("api/hotel")]
+    public class HotelController : ApiController
     {
 
         [HttpGet]

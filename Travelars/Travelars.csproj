@@ -248,6 +248,7 @@
     <Compile Include="Models\Ticket\Seat.cs" />
     <Compile Include="Models\Ticket\SeatsType.cs" />
     <Compile Include="Models\Ticket\Station.cs" />
+    <Compile Include="Models\Ticket\BuyTicketsRequest.cs" />
     <Compile Include="Models\Ticket\TicketsRequest.cs" />
     <Compile Include="Models\Ticket\TicketsResponse.cs" />
     <Compile Include="Models\Ticket\TicketsVariant.cs" />
