@@ -13,6 +13,11 @@ namespace Travelars.ApiControllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
+        public AccountController()
+        {
+            
+        }
+
         public AccountController(
             IUserService userService,
             IMapper mapper)

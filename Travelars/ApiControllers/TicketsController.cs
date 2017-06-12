@@ -9,7 +9,7 @@ using Travelars.Models.Ticket;
 
 namespace Travelars.ApiControllers
 {
-    [RoutePrefix("api/tickets")]
+    [RoutePrefix("api/ticket")]
     public class TicketsController : ApiController
     {
         [Route("station")]

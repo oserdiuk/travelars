@@ -5,6 +5,7 @@ using Travelars.Models.Review;
 
 namespace Travelars.ApiControllers
 {
+    [Route("api/vote")]
     public class VoteController : ApiController
     {
         [HttpPost]

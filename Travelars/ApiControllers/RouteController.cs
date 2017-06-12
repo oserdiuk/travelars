@@ -12,7 +12,7 @@ using PlaceVisit = Travelars.Models.Route.PlaceVisit;
 
 namespace Travelars.ApiControllers
 {
-    [Route("api/route")]
+    [RoutePrefix("api/route")]
     public class RouteController : ApiController
     {
         private readonly IRouteService _routeService;

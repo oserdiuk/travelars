@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Travelars.DTO.Route
 {
@@ -25,5 +26,38 @@ namespace Travelars.DTO.Route
         public string PriceLevel { get; set; }
 
         public double Rating { get; set; }
+
+        public TimeSpan RecomendedTime { get; set; }
+
+        public string RecomendedSeason { get; set; }
+
+        public string RecommendedPartOfADay { get; set; }
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
+
+        public IList<UserVote> UserVotes { get; set; }
+
+        public void SetVisitTime(DateTime startVisitPlaceDate)
+        {
+            StartDateTime = startVisitPlaceDate;
+            EndDateTime = startVisitPlaceDate.Add(RecomendedTime);
+        }
+    }
+
+    public class UserVote
+    {
+        public Guid UserId { get; set; }
+
+        public Guid PlaceId { get; set; }
+
+        public TimeSpan RecomendedTime { get; set; }
+
+        public string RecomendedSeason { get; set; }
+
+        public string RecommendedPartOfADay { get; set; }
+
+        public double UserRate { get; set; }
+
+        public string Review { get; set; }
     }
 }
