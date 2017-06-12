@@ -128,11 +128,11 @@ namespace Travelars.Services.RouteServices
 
         private void FillWithDataFromDatabase(PlaceVisit placeVisit)
         {
-            var storedPlace = _unitOfWork.PlaceRepository.FirstOrDefault(p => p.PlaceId == placeVisit.PlaceId);
-            placeVisit.RecomendedSeason = storedPlace.RecomendedSeason;
-            placeVisit.RecomendedTime = storedPlace.RecomendedTime;
-            placeVisit.RecommendedPartOfADay = storedPlace.RecommendedPartOfADay;
-            placeVisit.Rating = storedPlace.UserRate;
+            //var storedPlace = _unitOfWork.PlaceRepository.FirstOrDefault(p => p.PlaceId == placeVisit.PlaceId);
+            //placeVisit.RecomendedSeason = storedPlace.RecomendedSeason;
+            //placeVisit.RecomendedTime = storedPlace.RecomendedTime;
+            //placeVisit.RecommendedPartOfADay = storedPlace.RecommendedPartOfADay;
+            //placeVisit.Rating = storedPlace.UserRate;
         }
     }
 

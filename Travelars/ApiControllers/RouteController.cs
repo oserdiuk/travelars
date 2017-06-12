@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using AutoMapper;
 using Travelars.DTO.GoogleModels;
@@ -13,6 +14,7 @@ using PlaceVisit = Travelars.Models.Route.PlaceVisit;
 namespace Travelars.ApiControllers
 {
     [RoutePrefix("api/route")]
+    [Authorize]
     public class RouteController : ApiController
     {
         private readonly IRouteService _routeService;
@@ -33,7 +35,11 @@ namespace Travelars.ApiControllers
         [Route("")]
         public HttpResponseMessage GetRoute([FromUri] Guid routeId)
         {
-            return Request.CreateResponse(HttpStatusCode.OK);
+            var data =
+                "{\r\n  \"Id\": \"3d279b9f-d0ab-484c-8c6d-2302aa66c77d\",\r\n  \"SchedulePerDay\": [\r\n    [\r\n      {\r\n        \"PlaceType\": [\r\n          \"Cafe\",\r\n          \"Establishment\",\r\n          \"Food\"\r\n        ],\r\n        \"PlaceId\": \"86ab955c6a2d528237bc28933bea3d8d4895c472\",\r\n        \"Address\": \"Konstytutsii Square, 2/2, Kharkiv\",\r\n        \"Phones\": [\r\n          \"+380 63 403 2515\"\r\n        ],\r\n        \"Name\": \"Gorodskoye kafe 1654\",\r\n        \"Longtitude\": \"49.989539\",\r\n        \"Latitude\": \"36.233345\",\r\n        \"IsOpenNow\": false,\r\n        \"OpeningHours\": [\r\n          \"Monday: 8:00 AM - 11:00 PM\",\r\n          \"Tuesday: 8:00 AM - 11:00 PM\",\r\n          \"Wednesday: 8:00 AM - 11:00 PM\",\r\n          \"Thursday: 8:00 AM - 11:00 PM\",\r\n          \"Friday: 8:00 AM - 11:00 PM\",\r\n          \"Saturday: 8:00 AM - 11:00 PM\",\r\n          \"Sunday: 10:00 AM - 11:00 PM\"\r\n        ],\r\n        \"ImageUrls\": [\r\n          \"https://lh5.ggpht.com/-SJMZxfmezRQ/WQg1sv1ABqI/AAAAAAAA7i4/UnpHqHXf_hcNofufkFNhQnkQ6C01htvKwCLIB/s240/photo\"\r\n        ],\r\n        \"PriceLevel\": 0,\r\n        \"Rating\": 4.6,\r\n\"startDateTime\": \"2017-08-31 13:00\",\r\n\"endDateTime\": \"2017-08-31 15:00\"\r\n\r\n      },\r\n      {\r\n        \"PlaceType\": [\r\n          \"Park\",\r\n          \"Establishment\"\r\n        ],\r\n        \"PlaceId\": \"566722132a9c5db7d22337517dc619dc5989fb89\",\r\n        \"startDateTime\": \"2017-08-31 16:00\",\r\n\"endDateTime\": \"2017-08-31 20:00\"\r\n      }\r\n    ]\r\n  ],\r\n  \"NumberOfTravelers\": 2,\r\n  \"City\": null,\r\n  \"MaxNumberOfPlacesPerDate\": 4,\r\n  \"StartDate\": \"2017-08-31T00:00:00\",\r\n  \"EndDate\": \"2017-09-02T00:00:00\",\r\n  \"RouteOrientation\": [\r\n    2\r\n  ]\r\n}\r\n";
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StringContent(data, Encoding.UTF8, "application/json");
+            return response;
         }
 
         //      {
@@ -64,6 +70,8 @@ namespace Travelars.ApiControllers
                 Phones = new List<string> { "+380 63 403 2515" },
                 Name = "Gorodskoye kafe 1654",
                 IsOpenNow = false,
+                Longtitude = "49.989539",
+                Latitude = "36.233345",
                 OpeningHours = new List<string>
                 {
                      "Monday: 8:00 AM - 11:00 PM",
@@ -83,6 +91,7 @@ namespace Travelars.ApiControllers
                 PlaceType = new List<string> { PlaceType.Park.ToString(), PlaceType.Establishment.ToString() },
                 PlaceId = "566722132a9c5db7d22337517dc619dc5989fb89",
                 Address = "Kutova Street, 16, Kharkiv",
+                Name = "Sad imeni T.G.ShEVChENKO",
                 Phones = null,
                 IsOpenNow = true,
                 OpeningHours = null,

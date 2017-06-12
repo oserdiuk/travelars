@@ -8,6 +8,7 @@ using System.Web.Http;
 namespace Travelars.ApiControllers
 {
     [RoutePrefix("api/hotel")]
+    [Authorize]
     public class HotelController : ApiController
     {
 

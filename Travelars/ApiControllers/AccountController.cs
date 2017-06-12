@@ -8,6 +8,7 @@ using Travelars.Services.Abstract;
 namespace Travelars.ApiControllers
 {
     [RoutePrefix("api/account")]
+    [Authorize]
     public class AccountController : ApiController
     {
         private readonly IUserService _userService;
@@ -25,6 +26,8 @@ namespace Travelars.ApiControllers
             _userService = userService;
             _mapper = mapper;
         }
+
+        
 
         // POST api/Account/Register
         [AllowAnonymous]
@@ -49,6 +52,21 @@ namespace Travelars.ApiControllers
         public IHttpActionResult ResetPassword(string password)
         {
            return Ok();
+        }
+
+        [Route("logout")]
+        [SwaggerOperation]
+        [HttpPost]
+        public IHttpActionResult Logout(RegisterModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var userModel = _mapper.Map<UserModel>(model);
+            var id = _userService.CreateUser(userModel);
+            return Ok(id);
         }
     }
 }

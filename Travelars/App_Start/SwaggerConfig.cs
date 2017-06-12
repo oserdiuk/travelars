@@ -18,10 +18,12 @@ namespace Travelars
                 {
                     c.SingleApiVersion("v1", "Travelars");
                     c.OperationFilter<SwaggerAddAuthorizationHeaderOperationFilter>();
+                    c.DocumentFilter<AuthTokenOperation>();
+                    c.DescribeAllEnumsAsStrings(); // this will do the trick
+
                 })
                 .EnableSwaggerUi(c =>
                 {
-
                 });          
         }
     }

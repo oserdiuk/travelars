@@ -8,11 +8,12 @@ namespace Travelars.Models.Review
 {
     public class ReviewRequest
     {
-        public TimeSpan RecommendedTime { get; set; }
+        public string PlaceId { get; set; }
+        public int RecommendedTime { get; set; }
 
         public List<Season> RecommendedSeasons { get; set; }
 
-        public PartOfADay RecommendedPartOfADay { get; set; }
+        public List<PartOfADay> RecommendedPartOfADay { get; set; }
 
         public double Rate { get; set; }
 

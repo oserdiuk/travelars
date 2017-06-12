@@ -9,6 +9,7 @@ using Travelars.Models.Ticket;
 
 namespace Travelars.ApiControllers
 {
+    [Authorize]
     [RoutePrefix("api/ticket")]
     public class TicketsController : ApiController
     {
@@ -84,9 +85,47 @@ namespace Travelars.ApiControllers
 
         [Route("")]
         [HttpPost]
-        public HttpResponseMessage BuyTicket([FromBody] TicketsRequest model)
+        public HttpResponseMessage BuyTicket([FromBody] BuyTicketsRequest model)
         {
-            return Request.CreateResponse(HttpStatusCode.NotFound);
+            var result = new BuyTicketsResponse()
+            {
+                LinkForPaying = "https://utu.2.com/pay/fdgdse4343v-c4tjlll3cHkLl3lgfeg_34rfer22esw",
+                DepartureStation = new Station
+                {
+                    Id = "22200001",
+                    Name = "КИЕВ-ПАССАЖИРСКИЙ"
+                },
+                ArrivalStation = new Station
+                {
+                    Id = "22204001",
+                    Name = "ХАРЬКОВ-ПАСС"
+                },
+                DepartureDate = new DateTime(2017, 8, 11),
+                OwnerEmail = model.OwnerEmail,
+                OwnerPhone = model.OwnerPhone,
+                Variants = new TicketsVariant
+                {
+                    Id = "c1912161-a121-7d0d-00cb-00373736cf00",
+                    DepartureDate = new DateTime(2017, 8, 11),
+                    Duration = new TimeSpan(0, 10, 15, 0),
+                    Trip = new Trip
+                    {
+                        Id = "776П",
+                        DepartureStation = new Station
+                        {
+                            Id = "22200001",
+                            Name = "КИЕВ-ПАССАЖИРСКИЙ"
+                        },
+                        ArrivalStation = new Station
+                        {
+                            Id = "22204001",
+                            Name = "ХАРЬКОВ-ПАСС"
+                        }
+                    },
+                    
+                }
+            };
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
     }
 }

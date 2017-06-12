@@ -215,6 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\AccountController.cs" />
+    <Compile Include="ApiControllers\PlaceController.cs" />
     <Compile Include="ApiControllers\RouteController.cs" />
     <Compile Include="ApiControllers\HotelController.cs" />
     <Compile Include="ApiControllers\TicketsController.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\AccessTokenOperation.cs" />
     <Compile Include="Infrastructure\AuthorizationServerProvider.cs" />
     <Compile Include="Infrastructure\SwaggerAddAuthorizationHeaderOperationFilter.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -248,6 +250,7 @@
     <Compile Include="Models\Ticket\Seat.cs" />
     <Compile Include="Models\Ticket\SeatsType.cs" />
     <Compile Include="Models\Ticket\Station.cs" />
+    <Compile Include="Models\Ticket\BuyTicketsRequest.cs" />
     <Compile Include="Models\Ticket\TicketsRequest.cs" />
     <Compile Include="Models\Ticket\TicketsResponse.cs" />
     <Compile Include="Models\Ticket\TicketsVariant.cs" />
