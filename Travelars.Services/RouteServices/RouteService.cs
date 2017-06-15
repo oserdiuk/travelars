@@ -21,6 +21,7 @@ namespace Travelars.Services.RouteServices
     public class RouteService : IRouteService
     {
         private const int AvailableHoursPerDay = 8;
+        private const int MaxAvailablePoint = 100;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfigSettingsProvider _configSettingsProvider;
@@ -34,7 +35,7 @@ namespace Travelars.Services.RouteServices
 
         public RouteService()
         {
-            
+
         }
 
         public RoutePlan GenerateRoute(RouteFilter requestModel)
@@ -71,8 +72,7 @@ namespace Travelars.Services.RouteServices
 
         private PlaceVisit GetPlaceNearby(string placeName, IEnumerable<PlaceType> typesFilter, DateTime startVisitDate)
         {
-            //var keyword = startVisitDate.IsDinnerTime() ? _configSettingsProvider.DinnerKeyword : string.Empty;
-            var keyword = true ? _configSettingsProvider.DinnerKeyword : string.Empty;
+            var keyword = startVisitDate.IsDinnerTime() ? _configSettingsProvider.DinnerKeyword : string.Empty;
 
             var queryResult = GooglePlaces.NearBySearch.Query(new PlacesNearBySearchRequest
             {
@@ -82,8 +82,8 @@ namespace Travelars.Services.RouteServices
             });
 
             var places = string.IsNullOrWhiteSpace(keyword)
-                ? queryResult.Results.Where( place => typesFilter.Any(
-                            type => place.Types.Any(placeType => placeType.ToEnumString() == type.ToEnumString())))
+                ? queryResult.Results.Where(place => typesFilter.Any(
+                           type => place.Types.Any(placeType => placeType.ToEnumString() == type.ToEnumString())))
                 : queryResult.Results;
             var googlePlace = GooglePlaces.Details.Query(new PlacesDetailsRequest { PlaceId = places.ElementAt(1).PlaceId }).Result;
             var placeVisit = _mapper.Map<PlaceVisit>(googlePlace);
@@ -110,29 +110,28 @@ namespace Travelars.Services.RouteServices
 
         private double SetRating(PlaceVisit placeVisit, IEnumerable<Review> placeReview)
         {
-            //var allVotes = _unitOfWork.VoteRepository.Get();
-            //var votesCount = placeVisit.UserVotes.Count + placeReview.Count();
-            //var votesSum = placeVisit.UserVotes.Sum(v => v.UserRate) + placeReview.Sum(r => r.Rating);
-            //var allVotesCount = allVotes.Count();
-            //var middleRate = votesSum / votesCount;
-            //var middleRateGeneral = allVotes.Sum(v => v.UserRate) / allVotesCount;
+            var allVotes = _unitOfWork.VoteRepository.Get();
+            var votesCount = placeVisit.UserVotes.Count + placeReview.Count();
+            var votesSum = placeVisit.UserVotes.Sum(v => v.UserRate) + placeReview.Sum(r => r.Rating);
+            var allVotesCount = allVotes.Count();
+            var middleRate = votesSum / votesCount;
+            var middleRateGeneral = allVotes.Sum(v => v.UserRate) / allVotesCount;
 
-            //var sumOfRates = allVotesCount * middleRateGeneral + votesCount * middleRate;
-            //var sumOfRateCount = allVotesCount + votesCount;
-            //var bayes = sumOfRates / sumOfRateCount;
-            //var numberInRating = bayes / MaxAvailablePoint;
-            //var rate = Math.Round(numberInRating, 2);
-            //return rate;
-            return 0;
+            var sumOfRates = allVotesCount * middleRateGeneral + votesCount * middleRate;
+            var sumOfRateCount = allVotesCount + votesCount;
+            var bayes = sumOfRates / sumOfRateCount;
+            var numberInRating = bayes / MaxAvailablePoint;
+            var rate = Math.Round(numberInRating, 2);
+            return rate;
         }
 
         private void FillWithDataFromDatabase(PlaceVisit placeVisit)
         {
-            //var storedPlace = _unitOfWork.PlaceRepository.FirstOrDefault(p => p.PlaceId == placeVisit.PlaceId);
-            //placeVisit.RecomendedSeason = storedPlace.RecomendedSeason;
-            //placeVisit.RecomendedTime = storedPlace.RecomendedTime;
-            //placeVisit.RecommendedPartOfADay = storedPlace.RecommendedPartOfADay;
-            //placeVisit.Rating = storedPlace.UserRate;
+            var storedPlace = _unitOfWork.PlaceRepository.FirstOrDefault(p => p.PlaceId == placeVisit.PlaceId);
+            placeVisit.RecomendedSeason = storedPlace.RecomendedSeason;
+            placeVisit.RecomendedTime = storedPlace.RecomendedTime;
+            placeVisit.RecommendedPartOfADay = storedPlace.RecommendedPartOfADay;
+            placeVisit.Rating = storedPlace.UserRate;
         }
     }
 

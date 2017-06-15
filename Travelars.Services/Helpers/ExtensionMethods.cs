@@ -48,5 +48,12 @@ namespace Travelars.Services.Helpers
 
             return 1;
         }
+
+        public static bool IsDinnerTime(this DateTime date)
+        {
+            return (date.TimeOfDay > new TimeSpan(9, 0, 0) && date.TimeOfDay < new TimeSpan(11, 0, 0))
+                   || (date.TimeOfDay > new TimeSpan(13, 0, 0) && date.TimeOfDay < new TimeSpan(15, 0, 0))
+                   || (date.TimeOfDay > new TimeSpan(17, 0, 0) && date.TimeOfDay < new TimeSpan(20, 0, 0));
+        }
     }
 }
